@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker Jenkins Demo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Docker + Jenkins CI/CD</h1>
+
+        <h2>Welcome to My DevOps Application</h2>
+
+        <p>
+            This application is automatically built and deployed
+            using Jenkins and Docker.
+        </p>
+
+        <div class="box">
+            <p><strong>Source:</strong> GitHub</p>
+            <p><strong>CI/CD:</strong> Jenkins</p>
+            <p><strong>Container:</strong> Docker</p>
+            <p><strong>Registry:</strong> Docker Hub</p>
+        </div>
+
+        <button onclick="showMessage()">
+            Test Application
+        </button>
+
+        <p id="message"></p>
+    </div>
+
+    <script>
+        function showMessage() {
+            document.getElementById("message").innerHTML =
+                "Application is running successfully inside Docker!";
+        }
+    </script>
+
+</body>
+</html>
