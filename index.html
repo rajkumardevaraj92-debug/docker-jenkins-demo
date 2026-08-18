@@ -3,41 +3,637 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Docker Jenkins Demo</title>
-    <link rel="stylesheet" href="style.css">
+
+    <title>ShopKart - Online Shopping</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f1f3f6;
+            color: #212121;
+        }
+
+        /* HEADER */
+        header {
+            background: #2874f0;
+            height: 65px;
+            display: flex;
+            align-items: center;
+            padding: 0 8%;
+            gap: 25px;
+            color: white;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            font-style: italic;
+            min-width: 120px;
+        }
+
+        .logo span {
+            display: block;
+            font-size: 12px;
+            font-style: normal;
+            color: #ffe500;
+            text-align: center;
+        }
+
+        .search {
+            flex: 1;
+            display: flex;
+            max-width: 600px;
+        }
+
+        .search input {
+            width: 100%;
+            padding: 13px 18px;
+            border: none;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .search button {
+            width: 55px;
+            border: none;
+            background: white;
+            color: #2874f0;
+            font-size: 20px;
+        }
+
+        .header-link {
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        /* CATEGORIES */
+        .categories {
+            background: white;
+            display: flex;
+            justify-content: center;
+            gap: 55px;
+            padding: 15px;
+            box-shadow: 0 2px 5px #ccc;
+        }
+
+        .category {
+            text-align: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .category img {
+            width: 55px;
+            height: 55px;
+            object-fit: contain;
+            display: block;
+            margin: auto;
+        }
+
+        /* HERO */
+        .hero {
+            margin: 18px;
+            height: 310px;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+            background: #092456;
+        }
+
+        .hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-content {
+            position: absolute;
+            top: 55px;
+            left: 13%;
+            color: white;
+        }
+
+        .hero-content h1 {
+            font-size: 42px;
+            color: #ffd600;
+            margin-bottom: 15px;
+        }
+
+        .hero-content p {
+            font-size: 21px;
+            margin-bottom: 25px;
+        }
+
+        .shop-btn {
+            padding: 13px 30px;
+            border: none;
+            background: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* BENEFITS */
+        .benefits {
+            display: flex;
+            gap: 15px;
+            margin: 18px;
+        }
+
+        .benefit {
+            background: white;
+            padding: 22px;
+            flex: 1;
+            border: 1px solid #ddd;
+        }
+
+        .benefit h3 {
+            margin-bottom: 7px;
+        }
+
+        /* PRODUCTS */
+        .products-section {
+            background: white;
+            margin: 18px;
+            padding: 20px;
+        }
+
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-title h2 {
+            font-size: 25px;
+        }
+
+        .view-btn {
+            background: #2874f0;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            cursor: pointer;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 15px;
+        }
+
+        .product {
+            border: 1px solid #eee;
+            padding: 15px;
+            text-align: center;
+            transition: 0.3s;
+            background: white;
+        }
+
+        .product:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px #ccc;
+        }
+
+        .product img {
+            width: 100%;
+            height: 170px;
+            object-fit: contain;
+            margin-bottom: 12px;
+        }
+
+        .product h3 {
+            font-size: 15px;
+            margin-bottom: 12px;
+        }
+
+        .price {
+            font-weight: bold;
+            font-size: 17px;
+        }
+
+        .discount {
+            color: green;
+            margin-left: 5px;
+            font-size: 14px;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #172337;
+            color: white;
+            padding: 35px;
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        footer h2 {
+            margin-bottom: 10px;
+        }
+
+        /* RESPONSIVE */
+        @media(max-width: 900px) {
+            header {
+                padding: 0 3%;
+            }
+
+            .categories {
+                gap: 20px;
+                overflow-x: auto;
+                justify-content: flex-start;
+            }
+
+            .products {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .benefits {
+                flex-wrap: wrap;
+            }
+
+            .benefit {
+                min-width: 45%;
+            }
+        }
+
+        @media(max-width: 600px) {
+            header {
+                height: auto;
+                padding: 15px;
+                flex-wrap: wrap;
+            }
+
+            .search {
+                order: 3;
+                flex-basis: 100%;
+            }
+
+            .hero {
+                height: 250px;
+            }
+
+            .hero-content {
+                left: 8%;
+                top: 35px;
+            }
+
+            .hero-content h1 {
+                font-size: 28px;
+            }
+
+            .hero-content p {
+                font-size: 16px;
+            }
+
+            .products {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .benefit {
+                min-width: 100%;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-    <div class="container">
-        <h1>Docker + Jenkins Automated CI/CD</h1>
+<!-- HEADER -->
+<header>
 
-        <h2>Welcome to My DevOps Application</h2>
-
-        <p>
-            This application is automatically built and deployed
-            using Jenkins and Docker.
-        </p>
-
-        <div class="box">
-            <p><strong>Source:</strong> GitHub</p>
-            <p><strong>CI/CD:</strong> Jenkins</p>
-            <p><strong>Container:</strong> Docker</p>
-            <p><strong>Registry:</strong> Docker Hub</p>
-        </div>
-
-        <button onclick="showMessage()">
-            Test Application
-        </button>
-
-        <p id="message"></p>
+    <div class="logo">
+        ShopKart
+        <span>Explore Plus ★</span>
     </div>
 
-    <script>
-        function showMessage() {
-            document.getElementById("message").innerHTML =
-                "Application is running successfully inside Docker!";
+    <div class="search">
+        <input
+            type="text"
+            placeholder="Search for products, brands and more"
+            id="searchInput"
+        >
+        <button onclick="searchProduct()">🔍</button>
+    </div>
+
+    <div class="header-link">Login</div>
+    <div class="header-link">Become a Seller</div>
+    <div class="header-link">More ▼</div>
+    <div class="header-link">🛒 Cart</div>
+
+</header>
+
+
+<!-- CATEGORIES -->
+<div class="categories">
+
+    <div class="category">
+        <img src="https://cdn-icons-png.flaticon.com/512/726/726541.png">
+        Top Offers
+    </div>
+
+    <div class="category">
+        <img src="https://cdn-icons-png.flaticon.com/512/644/644458.png">
+        Mobiles
+    </div>
+
+    <div class="category">
+        <img src="https://cdn-icons-png.flaticon.com/512/3474/3474360.png">
+        Electronics
+    </div>
+
+    <div class="category">
+        <img src="https://cdn-icons-png.flaticon.com/512/3079/3079165.png">
+        TVs & Appliances
+    </div>
+
+    <div class="category">
+        <img src="https://cdn-icons-png.flaticon.com/512/3050/3050255.png">
+        Fashion
+    </div>
+
+    <div class="category">
+        <img src="https://cdn-icons-png.flaticon.com/512/3082/3082011.png">
+        Beauty
+    </div>
+
+    <div class="category">
+        <img src="https://cdn-icons-png.flaticon.com/512/3081/3081559.png">
+        Home
+    </div>
+
+    <div class="category">
+        <img src="https://cdn-icons-png.flaticon.com/512/685/685352.png">
+        Travel
+    </div>
+
+</div>
+
+
+<!-- HERO BANNER -->
+<div class="hero">
+
+    <img
+        src="https://images.unsplash.com/photo-1607082349566-187342175e2f?auto=format&fit=crop&w=1600&q=80"
+        alt="Shopping Banner"
+    >
+
+    <div class="hero-content">
+
+        <h1>BIG SHOPPING DAYS!</h1>
+
+        <p>
+            Best Deals on Top Brands<br>
+            Shop Now & Save Big
+        </p>
+
+        <button class="shop-btn" onclick="shopNow()">
+            Shop Now
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- BENEFITS -->
+<div class="benefits">
+
+    <div class="benefit">
+        <h3>💳 No Cost EMI</h3>
+        <p>From ₹1,999/month</p>
+    </div>
+
+    <div class="benefit">
+        <h3>🛡️ Secure Payments</h3>
+        <p>100% safe & secure</p>
+    </div>
+
+    <div class="benefit">
+        <h3>🔄 Best Exchange</h3>
+        <p>Get amazing exchange offers</p>
+    </div>
+
+    <div class="benefit">
+        <h3>🚚 Free Delivery</h3>
+        <p>On selected products</p>
+    </div>
+
+    <div class="benefit">
+        <h3>⭐ Top Brands</h3>
+        <p>100% genuine products</p>
+    </div>
+
+</div>
+
+
+<!-- PRODUCTS -->
+<div class="products-section">
+
+    <div class="section-title">
+
+        <h2>Best of Electronics</h2>
+
+        <button class="view-btn">
+            View All
+        </button>
+
+    </div>
+
+
+    <div class="products">
+
+        <div class="product">
+
+            <img src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=500&q=80">
+
+            <h3>Premium Smartphone</h3>
+
+            <span class="price">₹69,999</span>
+            <span class="discount">20% Off</span>
+
+        </div>
+
+
+        <div class="product">
+
+            <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=500&q=80">
+
+            <h3>ASUS Laptop</h3>
+
+            <span class="price">₹42,990</span>
+            <span class="discount">22% Off</span>
+
+        </div>
+
+
+        <div class="product">
+
+            <img src="https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?auto=format&fit=crop&w=500&q=80">
+
+            <h3>Wireless Earbuds</h3>
+
+            <span class="price">₹1,299</span>
+            <span class="discount">35% Off</span>
+
+        </div>
+
+
+        <div class="product">
+
+            <img src="https://images.unsplash.com/photo-1544117519-31a4b719223d?auto=format&fit=crop&w=500&q=80">
+
+            <h3>Smart Watch</h3>
+
+            <span class="price">₹2,499</span>
+            <span class="discount">37% Off</span>
+
+        </div>
+
+
+        <div class="product">
+
+            <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=500&q=80">
+
+            <h3>Digital Camera</h3>
+
+            <span class="price">₹44,990</span>
+            <span class="discount">18% Off</span>
+
+        </div>
+
+
+        <div class="product">
+
+            <img src="https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=500&q=80">
+
+            <h3>Bluetooth Speaker</h3>
+
+            <span class="price">₹8,999</span>
+            <span class="discount">25% Off</span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- SECOND PRODUCT SECTION -->
+<div class="products-section">
+
+    <div class="section-title">
+
+        <h2>Fashion Deals</h2>
+
+        <button class="view-btn">
+            View All
+        </button>
+
+    </div>
+
+
+    <div class="products">
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=500&q=80">
+            <h3>Premium T-Shirt</h3>
+            <span class="price">₹499</span>
+            <span class="discount">50% Off</span>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=500&q=80">
+            <h3>Running Shoes</h3>
+            <span class="price">₹1,999</span>
+            <span class="discount">40% Off</span>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=500&q=80">
+            <h3>Men's Jacket</h3>
+            <span class="price">₹1,499</span>
+            <span class="discount">45% Off</span>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=500&q=80">
+            <h3>Women's Dress</h3>
+            <span class="price">₹899</span>
+            <span class="discount">55% Off</span>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=500&q=80">
+            <h3>Travel Backpack</h3>
+            <span class="price">₹799</span>
+            <span class="discount">30% Off</span>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=500&q=80">
+            <h3>Women's Handbag</h3>
+            <span class="price">₹1,299</span>
+            <span class="discount">35% Off</span>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- FOOTER -->
+<footer>
+
+    <h2>ShopKart</h2>
+
+    <p>
+        Your one-stop destination for electronics,
+        fashion, home appliances and more.
+    </p>
+
+    <br>
+
+    <p>
+        © 2026 ShopKart | Built using Docker + Jenkins CI/CD
+    </p>
+
+</footer>
+
+
+<script>
+
+    function showMessage() {
+        alert("Application is running successfully inside Docker!");
+    }
+
+    function shopNow() {
+        alert("Welcome to ShopKart! Start shopping now.");
+    }
+
+    function searchProduct() {
+
+        let search =
+            document.getElementById("searchInput").value;
+
+        if (search.trim() === "") {
+
+            alert("Please enter a product to search.");
+
+        } else {
+
+            alert("Searching for: " + search);
+
         }
-    </script>
+    }
+
+</script>
 
 </body>
 </html>
