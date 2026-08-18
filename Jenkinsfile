@@ -71,7 +71,7 @@ pipeline {
 
                     docker run -d \
                         --name docker-jenkins-demo \
-                        -p 8080:80 \
+                        -p 8081:80 \
                         ${DOCKER_IMAGE}:latest
 
                     docker ps
